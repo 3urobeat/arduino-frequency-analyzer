@@ -4,7 +4,7 @@
  * Created Date: 10.09.2022 14:42:27
  * Author: 3urobeat
  * 
- * Last Modified: 10.09.2022 14:43:42
+ * Last Modified: 18.09.2022 19:50:56
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -15,3 +15,14 @@
  */
 
 
+// Display Pins:
+// SCLK: 14
+// MOSI: 13
+// MISO: 12
+// CS: 15
+// RES: 32
+// DC: 33
+// BLK: 25
+// Touch_CS: 2
+// INT: 4
+// SDCS: 16
