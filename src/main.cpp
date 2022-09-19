@@ -4,7 +4,7 @@
  * Created Date: 10.09.2022 14:42:22
  * Author: 3urobeat
  * 
- * Last Modified: 10.09.2022 14:43:59
+ * Last Modified: 19.09.2022 14:45:01
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -15,9 +15,27 @@
  */
 
 
+#include "main.h"
+
+const char *version = "v0.1.0";
+
+// Call display lib constructor
+TFT_eSPI tft = TFT_eSPI();
+
+
+// Setup stuff on poweron
 void setup() {
 
+    // Init display and show welcome screen
+    tft.init();
+    tft.setRotation(1);
+    tft.fillScreen(TFT_BLACK);
+    tft.setCursor(0, 0, 1); // last param is the font to use, use it everywhere
+
+    showWelcomeScreen(5000); // show the welcome screen 
+
 }
+
 
 void loop() {
     
