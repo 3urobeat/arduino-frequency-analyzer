@@ -4,7 +4,7 @@
  * Created Date: 19.09.2022 14:53:19
  * Author: 3urobeat
  * 
- * Last Modified: 20.09.2022 18:25:02
+ * Last Modified: 20.09.2022 18:50:00
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -31,7 +31,7 @@ void setupReadoutScreen() {
 
 
     /* ------ Show spectrum diagram volume labels ------ */
-    int cursorPosY = 45; // track current y pos locally to increment it easily
+    int cursorPosY = 45; // track current y pos locally to increment it easily, start with first label at y = 45
 
     // set font and color once
     tft.setFreeFont(FMB9);
@@ -40,7 +40,7 @@ void setupReadoutScreen() {
     // We need to print 7 numbers
     const char nums[7][4] = {"  0", "-10", "-20", "-30", "-40", "-50", "-60"};
 
-    for (int i = 0; i <= 7; i++) {
+    for (int i = 0; i <= 6; i++) {
         tft.setCursor(5, cursorPosY); // set cursor to current pos
         tft.print(nums[i]);           // print the correct number for this iteration
         cursorPosY += 17.5;           // move cursor down
