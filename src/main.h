@@ -4,7 +4,7 @@
  * Created Date: 10.09.2022 14:42:27
  * Author: 3urobeat
  * 
- * Last Modified: 19.09.2022 14:42:45
+ * Last Modified: 20.09.2022 17:59:39
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -17,6 +17,7 @@
 
 #include <SPI.h>
 #include <TFT_eSPI.h>
+#include "../lib/TFT_eSPI/examples/320 x 240/Free_Font_Demo/Free_Fonts.h" // excuse me for this stupid import but please let me use the free fonts definitions fellow compiler, thank you.
 
 extern const char *version;
 extern TFT_eSPI tft;
