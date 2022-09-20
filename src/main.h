@@ -23,6 +23,7 @@ extern const char *version;
 extern TFT_eSPI tft;
 
 void showWelcomeScreen(unsigned int clearDelay);
+void setupReadoutScreen();
 
 
 

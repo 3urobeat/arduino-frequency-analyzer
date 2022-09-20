@@ -4,7 +4,7 @@
  * Created Date: 19.09.2022 14:53:19
  * Author: 3urobeat
  * 
- * Last Modified: 20.09.2022 18:50:00
+ * Last Modified: 20.09.2022 19:52:14
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -48,7 +48,29 @@ void setupReadoutScreen() {
 
 
     /* ------ Show spectrum diagram frequency labels ------ */
+    int cursorPosX = 36; // track current x pos locally to increment it easily, start with first label at x = 36
 
+    // set font and color once
+    tft.setTextFont(2);
+    tft.setTextColor(TFT_LIGHTGREY, TFT_BLACK, true);
+
+    // We need to print 15 numbers
+    const char freqs[15][4] = {" 25", " 40", " 63", "100", "157", "250", "400", "630", " 1k", "1k6", "2k5", " 4k", "6k3", "10k", "16k"};
+
+    for (int i = 0; i <= 14; i++) {
+        
+        // Because of limited space, we need to print at alternating height
+        if (i % 2 == 0) {
+            tft.drawFastVLine(cursorPosX + 11, 156, 12, TFT_LIGHTGREY); // Draw (long) line pointing label to corresponding bar. Move to the label middle, start at y = 156 and draw down 12 pixels
+            tft.setCursor(cursorPosX, 170); // Set height for the label
+        } else {
+            tft.drawFastVLine(cursorPosX + 12, 154, 1, TFT_LIGHTGREY); // Draw (short) line pointing label to corresponding bar
+            tft.setCursor(cursorPosX, 155); // Set height for the label
+        }
+
+        tft.print(freqs[i]); // print the correct number for this iteration
+        cursorPosX += 18;    // move cursor right
+    }
 
 
     /* ------ Show left/right channel volume label ------ */
