@@ -4,7 +4,7 @@
  * Created Date: 19.09.2022 14:28:53
  * Author: 3urobeat
  * 
- * Last Modified: 19.09.2022 14:46:03
+ * Last Modified: 20.09.2022 18:47:03
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -27,7 +27,6 @@
 void showWelcomeScreen(unsigned int clearDelay) {
     
     // Print project name somewhere mid-ish
-    tft.setTextSize(2);
     tft.setTextColor(TFT_GOLD, TFT_BLACK, true);
     tft.setTextDatum(MC_DATUM);
     tft.drawString("arduino-frequency-analyzer", tft.width() / 2, 100);
@@ -36,9 +35,6 @@ void showWelcomeScreen(unsigned int clearDelay) {
     tft.setTextColor(TFT_WHITE, TFT_BLACK, true);
     tft.setTextDatum(MC_DATUM);
     tft.drawString(version, tft.width() / 2, 120);
-
-    // Reset text size multiplier, could cause weirdness otherwise later on
-    tft.setTextSize(1);
 
     // Clear welcome screen again after a few seconds, device will enter loop shortly
     delay(clearDelay);
