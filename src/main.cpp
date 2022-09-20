@@ -4,7 +4,7 @@
  * Created Date: 10.09.2022 14:42:22
  * Author: 3urobeat
  * 
- * Last Modified: 19.09.2022 14:45:01
+ * Last Modified: 20.09.2022 18:02:31
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -33,6 +33,8 @@ void setup() {
     tft.setCursor(0, 0, 1); // last param is the font to use, use it everywhere
 
     showWelcomeScreen(5000); // show the welcome screen 
+    // Setup readout screen by showing labels etc 
+    setupReadoutScreen();
 
 }
 
