@@ -4,7 +4,7 @@
  * Created Date: 19.09.2022 14:53:19
  * Author: 3urobeat
  * 
- * Last Modified: 20.09.2022 19:52:14
+ * Last Modified: 20.09.2022 20:02:50
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -74,10 +74,18 @@ void setupReadoutScreen() {
 
 
     /* ------ Show left/right channel volume label ------ */
-
-
+    tft.setFreeFont(FMB9);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.setCursor(10, 205);
+    tft.print("L");
+    tft.setCursor(10, 225);
+    tft.print("R");
+    
 
     /* ------ Show left/right channel volume dummy readout ------ */
-
+    tft.setCursor(265, 205);
+    tft.print(" 00.0");
+    tft.setCursor(265, 225);
+    tft.print(" 00.0");
 
 }
