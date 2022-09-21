@@ -1,10 +1,10 @@
 /*
- * File: main.h
+ * File: helpers.h
  * Project: arduino-frequency-analyzer
- * Created Date: 10.09.2022 14:42:27
+ * Created Date: 19.09.2022 13:45:43
  * Author: 3urobeat
  * 
- * Last Modified: 21.09.2022 20:28:39
+ * Last Modified: 21.09.2022 20:17:16
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -15,31 +15,5 @@
  */
 
 
-#include <SPI.h>
-#include <TFT_eSPI.h>
-#include "../lib/TFT_eSPI/examples/320 x 240/Free_Font_Demo/Free_Fonts.h" // excuse me for this stupid import but please let me use the free fonts definitions fellow compiler, thank you.
+#include "main.h"
 
-extern const char *version;
-extern TFT_eSPI tft;
-
-void showWelcomeScreen(unsigned int clearDelay);
-void setupReadoutScreen();
-
-
-
-// Display Pins:
-// SCLK: 14
-// MOSI: 13
-// MISO: 12
-// CS: 15
-// RES: 32
-// DC: 33
-// BLK: 25
-// Touch_CS: 2
-// INT: 4
-// SDCS: 16
-//
-// Left  Audio Channel: 35 (ADC1_CHANNEL_7)
-// Right Audio Channel: 26 (ADC2_CHANNEL_9)
-//
-// Note: WiFi cannot be used because Audio Channels are connected to ADC2 pins

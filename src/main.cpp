@@ -4,7 +4,7 @@
  * Created Date: 10.09.2022 14:42:22
  * Author: 3urobeat
  * 
- * Last Modified: 20.09.2022 18:47:35
+ * Last Modified: 21.09.2022 20:28:55
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -15,7 +15,10 @@
  */
 
 
+
 #include "main.h"
+#include "helpers/helpers.h"
+
 
 const char *version = "v0.1.0";
 
