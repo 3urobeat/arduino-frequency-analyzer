@@ -17,3 +17,5 @@
 
 #include "main.h"
 
+
+void drawSpectrumBar(int num, int percentage);
