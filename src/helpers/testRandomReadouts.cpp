@@ -1,10 +1,10 @@
 /*
- * File: helpers.h
+ * File: testRandomReadouts.cpp
  * Project: arduino-frequency-analyzer
- * Created Date: 19.09.2022 13:45:43
+ * Created Date: 22.09.2022 15:38:44
  * Author: 3urobeat
  * 
- * Last Modified: 22.09.2022 16:09:03
+ * Last Modified: 22.09.2022 15:49:40
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -15,11 +15,24 @@
  */
 
 
-#include "main.h"
+#include "helpers.h"
 
+/**
+ * Helper function that draws random readouts for testing the display related code
+ */
+void testRandomReadouts() {
 
-void drawSpectrumBar(int num, int percentage);
-void drawVolumeBar(int channel, int percentage);
-void drawVolumeReadout(int channel, float value);
+    // Draw random readouts for all 30 frequencies
+    for (int i = 0; i < 30; i++) {
+        drawSpectrumBar(i, rand() % 100);
+    }
 
-void testRandomReadouts();
+    // Draw two random bars for L and R channel
+    drawVolumeBar(0, rand() % 100);
+    drawVolumeBar(1, rand() % 100);
+
+    // Draw two random readouts for L and R channel
+    drawVolumeReadout(0, (rand() % 60) * -1);
+    drawVolumeReadout(1, (rand() % 60) * -1);
+
+}
