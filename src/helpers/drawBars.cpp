@@ -4,7 +4,7 @@
  * Created Date: 21.09.2022 20:12:32
  * Author: 3urobeat
  * 
- * Last Modified: 22.09.2022 17:16:43
+ * Last Modified: 22.09.2022 17:40:54
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -24,6 +24,8 @@ const int barWidth = 7;
 const int barHeight = 120;
 const int space = 2;
 
+int lastPercentages[30] = {};
+
 /**
  * Draws a bar at the right position on the spectrum diagram
  * @param num Number 0-32 which bar to draw
@@ -31,17 +33,25 @@ const int space = 2;
  */
 void drawSpectrumBar(int num, int percentage) {
 
+    // Check if we can abort here when nothing changed compared to the last readout to avoid flickering
+    if (lastPercentages[num] == percentage) return;
+
     // Calculate offset where this bar should be printed
     int xOffset = startX + (space * num) + (barWidth * num);
 
-    // first clear the last bar by printing a 100% black bar
-    tft.fillRect(xOffset, startY, barWidth, barHeight, TFT_BLACK);
+    // Convert percentage to pixels (percentage * 1.20 since our 100% is 120 pixels)
+    int percToPix = percentage * 1.2;
+
+    // first clear the last bar by printing a black bar but only as long as needed to avoid flickering
+    tft.fillRect(xOffset, startY, barWidth, barHeight - percToPix, TFT_BLACK);
 
     // then print the green bar
-    int percToPix = percentage * 1.2;               // percentage * 1.20 since our 100% is 120 pixels
     int yOffset = startY + (barHeight - percToPix); // offset so we practically print from the bottom up
 
     tft.fillRect(xOffset, yOffset, barWidth, percToPix, TFT_GREEN);
+
+    // Update storage
+    lastPercentages[num] = percentage;
 
 }
 
