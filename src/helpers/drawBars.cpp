@@ -4,7 +4,7 @@
  * Created Date: 21.09.2022 20:12:32
  * Author: 3urobeat
  * 
- * Last Modified: 21.09.2022 23:56:24
+ * Last Modified: 22.09.2022 14:59:51
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -42,5 +42,27 @@ void drawSpectrumBar(int num, int percentage) {
     int yOffset = startY + (barHeight - percToPix); // offset so we practically print from the bottom up
 
     tft.fillRect(xOffset, yOffset, barWidth, percToPix, TFT_GREEN);
+
+}
+
+
+const int vbarWidth = 225;
+const int vbarHeight = 13;
+
+/**
+ * Draws L and R channel volume bars
+ */
+void drawVolumeBar(int channel, int percentage) {
+
+    // Add offset if R channel (1) is selected
+    int yOffset = channel * 20;
+
+    // Print green bar
+    int percToPix = percentage * 2.25; // percentage * 2.25 since our 100% is 225 pixels
+
+    tft.fillRect(30, 194 + yOffset, percToPix, vbarHeight, TFT_GREEN);
+
+    // Then fill remaining space with a black bar to clear any remains from a previous bar that was longer
+    tft.fillRect(30 + percToPix, 194 + yOffset, vbarWidth - percToPix, vbarHeight, TFT_BLACK);
 
 }
