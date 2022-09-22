@@ -4,7 +4,7 @@
  * Created Date: 21.09.2022 20:12:32
  * Author: 3urobeat
  * 
- * Last Modified: 22.09.2022 15:58:25
+ * Last Modified: 22.09.2022 17:16:43
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -17,12 +17,12 @@
 
 #include "helpers.h"
 
+
 const int startX = 44;
 const int startY = 32;
 const int barWidth = 7;
 const int barHeight = 120;
 const int space = 2;
-
 
 /**
  * Draws a bar at the right position on the spectrum diagram
@@ -71,6 +71,12 @@ void drawVolumeBar(int channel, int percentage) {
 
 
 char readoutBuffer[6] = "";
+char shortBuffer[4]   = "";
+
+char lastReadoutL[6]   = "";  // stores last shown string so we can abort the next reprint if nothing changed to avoid flickering
+char lastDecimalL      = '0'; // stores last shown decimal to decide if it needs to be reprinted to avoid flickering
+char lastReadoutR[6]   = "";
+char lastDecimalR      = '0';
 
 /**
  * Draws L and R channel volume readout
@@ -96,10 +102,27 @@ void drawVolumeReadout(int channel, float value) {
         readoutBuffer[1] = '0'; // add another 0
     }
 
+    // Check if we can abort here when nothing changed compared to the last readout to avoid flickering
+    if (channel == 0 && strcmp(readoutBuffer, lastReadoutL) == 1) return;
+    if (channel == 1 && strcmp(readoutBuffer, lastReadoutR) == 1) return;
+
     // Add offset if R channel (1) is selected
     int yOffset = channel * 20;
 
-    // Draw the result
-    tft.drawString(readoutBuffer, 291, 198 + yOffset);
+    // Draw the result with decimal or without depending if same as lastDecimal to avoid flickering
+    if ((channel == 0 && readoutBuffer[4] == lastDecimalL) || (channel == 1 && readoutBuffer[4] == lastDecimalR)) { // we can use == here as we only compare one char
+        strncpy(shortBuffer, readoutBuffer, 3);          // cut away dot and decimal number
+        tft.drawString(shortBuffer, 280, 198 + yOffset); // I'm confused why I need a different x here but it works only like this?
+    } else {
+        tft.drawString(readoutBuffer, 291, 198 + yOffset);
+    }
 
+    // Update storage
+    if (channel == 0) {
+        strcpy(readoutBuffer, lastReadoutL);
+        lastDecimalL = readoutBuffer[4];
+    } else {
+        strcpy(readoutBuffer, lastReadoutR);
+        lastDecimalR = readoutBuffer[4];
+    }
 }
