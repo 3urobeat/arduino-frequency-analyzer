@@ -4,7 +4,7 @@
  * Created Date: 21.09.2022 20:12:32
  * Author: 3urobeat
  * 
- * Last Modified: 22.09.2022 14:59:51
+ * Last Modified: 22.09.2022 15:58:25
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -51,6 +51,8 @@ const int vbarHeight = 13;
 
 /**
  * Draws L and R channel volume bars
+ * @param channel Number 0-1, 0 for left channel, 1 for right channel
+ * @param percentage Number 0-100 how long the bar should be
  */
 void drawVolumeBar(int channel, int percentage) {
 
@@ -64,5 +66,40 @@ void drawVolumeBar(int channel, int percentage) {
 
     // Then fill remaining space with a black bar to clear any remains from a previous bar that was longer
     tft.fillRect(30 + percToPix, 194 + yOffset, vbarWidth - percToPix, vbarHeight, TFT_BLACK);
+
+}
+
+
+char readoutBuffer[6] = "";
+
+/**
+ * Draws L and R channel volume readout
+ * @param channel Number 0-1, 0 for left channel, 1 for right channel
+ * @param value Number to print
+ */
+void drawVolumeReadout(int channel, float value) {
+
+    // We don't support longer numbers
+    if (value < -99.9) value = -99.9;
+    if (value >  99.9) value =  99.9;
+
+    // Convert value to char array
+    dtostrf(value, 5, 1, readoutBuffer); // dtostrf() already aligns the number to the right with preceding spaces which is very cool
+
+    // Make value have a fixed length if <10 to reduce "flickering"/shifting on the display
+    if (value > -10 && value < 0) {
+        readoutBuffer[0] = '-'; // move minus one char to the left
+        readoutBuffer[1] = '0'; // replace minus with another 0
+    }
+
+    if (value < 10 && value >= 0) {
+        readoutBuffer[1] = '0'; // add another 0
+    }
+
+    // Add offset if R channel (1) is selected
+    int yOffset = channel * 20;
+
+    // Draw the result
+    tft.drawString(readoutBuffer, 291, 198 + yOffset);
 
 }

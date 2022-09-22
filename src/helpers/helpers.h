@@ -4,7 +4,7 @@
  * Created Date: 19.09.2022 13:45:43
  * Author: 3urobeat
  * 
- * Last Modified: 22.09.2022 00:30:18
+ * Last Modified: 22.09.2022 16:08:29
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -20,3 +20,4 @@
 
 void drawSpectrumBar(int num, int percentage);
 void drawVolumeBar(int channel, int percentage);
+void drawVolumeReadout(int channel, float value);
