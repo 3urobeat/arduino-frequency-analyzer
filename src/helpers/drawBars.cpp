@@ -4,7 +4,7 @@
  * Created Date: 21.09.2022 20:12:32
  * Author: 3urobeat
  * 
- * Last Modified: 22.09.2022 17:40:54
+ * Last Modified: 22.09.2022 17:43:23
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -59,12 +59,18 @@ void drawSpectrumBar(int num, int percentage) {
 const int vbarWidth = 225;
 const int vbarHeight = 13;
 
+int lastPercentageL = 0;
+int lastPercentageR = 0;
+
 /**
  * Draws L and R channel volume bars
  * @param channel Number 0-1, 0 for left channel, 1 for right channel
  * @param percentage Number 0-100 how long the bar should be
  */
 void drawVolumeBar(int channel, int percentage) {
+
+    // Check if we can abort here when nothing changed compared to the last readout to avoid flickering
+    if ((channel == 0 && lastPercentageL == percentage) || (channel == 1 && lastPercentageR == percentage)) return;
 
     // Add offset if R channel (1) is selected
     int yOffset = channel * 20;
@@ -76,6 +82,10 @@ void drawVolumeBar(int channel, int percentage) {
 
     // Then fill remaining space with a black bar to clear any remains from a previous bar that was longer
     tft.fillRect(30 + percToPix, 194 + yOffset, vbarWidth - percToPix, vbarHeight, TFT_BLACK);
+
+    // Update storage
+    if (channel == 0) lastPercentageL = percentage;
+        else lastPercentageR = percentage;
 
 }
 
