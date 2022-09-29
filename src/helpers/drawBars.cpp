@@ -4,7 +4,7 @@
  * Created Date: 21.09.2022 20:12:32
  * Author: 3urobeat
  * 
- * Last Modified: 22.09.2022 17:43:23
+ * Last Modified: 29.09.2022 21:14:52
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -42,13 +42,17 @@ void drawSpectrumBar(int num, int percentage) {
     // Convert percentage to pixels (percentage * 1.20 since our 100% is 120 pixels)
     int percToPix = percentage * 1.2;
 
-    // first clear the last bar by printing a black bar but only as long as needed to avoid flickering
+    // First clear the last bar by printing a black bar but only as long as needed to avoid flickering
     tft.fillRect(xOffset, startY, barWidth, barHeight - percToPix, TFT_BLACK);
 
-    // then print the green bar
-    int yOffset = startY + (barHeight - percToPix); // offset so we practically print from the bottom up
+    // Calculate new offset, starting at the end of the black bar
+    int yOffset = startY + (barHeight - percToPix); // offset so we practically print from the bottom up, +2 to not overwrite spectrum snow peak
 
-    tft.fillRect(xOffset, yOffset, barWidth, percToPix, TFT_GREEN);
+    // Call snow peak handler now as we are already at the right place to print
+    drawSpectrumSnowPeak(num, xOffset, yOffset); // don't run when percToPix is too small so we don't write into the labels
+
+    // Now print the green bar
+    tft.fillRect(xOffset, yOffset + 2, barWidth, percToPix, TFT_GREEN);
 
     // Update storage
     lastPercentages[num] = percentage;

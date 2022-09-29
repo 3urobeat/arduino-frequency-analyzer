@@ -4,7 +4,7 @@
  * Created Date: 19.09.2022 13:45:43
  * Author: 3urobeat
  * 
- * Last Modified: 22.09.2022 16:09:03
+ * Last Modified: 22.09.2022 19:32:49
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -18,8 +18,12 @@
 #include "main.h"
 
 
+void drawSpectrumSnowPeak(int num, int xOffset, int yOffset);
+
 void drawSpectrumBar(int num, int percentage);
 void drawVolumeBar(int channel, int percentage);
 void drawVolumeReadout(int channel, float value);
 
 void testRandomReadouts();
+
+extern const int barWidth;
