@@ -4,7 +4,7 @@
  * Created Date: 21.09.2022 20:12:32
  * Author: 3urobeat
  * 
- * Last Modified: 29.09.2022 21:14:52
+ * Last Modified: 29.09.2022 21:34:32
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -85,7 +85,10 @@ void drawVolumeBar(int channel, int percentage) {
     tft.fillRect(30, 194 + yOffset, percToPix, vbarHeight, TFT_GREEN);
 
     // Then fill remaining space with a black bar to clear any remains from a previous bar that was longer
-    tft.fillRect(30 + percToPix, 194 + yOffset, vbarWidth - percToPix, vbarHeight, TFT_BLACK);
+    tft.fillRect(32 + percToPix, 194 + yOffset, vbarWidth - percToPix, vbarHeight, TFT_BLACK); // 32 to leave space for 2 pixel wide snow peak
+
+    // Call snow peak handler after printing black bar
+    drawVolumeSnowPeak(channel, 30 + percToPix, 194 + yOffset);
 
     // Update storage
     if (channel == 0) lastPercentageL = percentage;

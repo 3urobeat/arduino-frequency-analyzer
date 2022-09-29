@@ -4,7 +4,7 @@
  * Created Date: 22.09.2022 18:43:26
  * Author: 3urobeat
  * 
- * Last Modified: 29.09.2022 21:15:27
+ * Last Modified: 29.09.2022 21:33:31
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -55,10 +55,26 @@ unsigned long lastVolumeTime[2] = {};
 /**
  * Handles drawing snow peaks for L and R channel volume bar
  * @param channel Number 0-1, 0 for left channel, 1 for right channel
- * @param value Bar length in pixel
+ * @param xOffset The x axis offset of this bar
+ * @param yOffset The y axis offset of this bar
  */
-void drawVolumeSnowPeak(int channel, int value) {
+void drawVolumeSnowPeak(int channel, int xOffset, int yOffset) {
 
+    // Draw new peak if higher, if last change is more than 2 sec ago or if no peak has been drawn before
+    if (xOffset > lastVolumePeak[channel] || millis() - lastVolumeTime[channel] > 2000 || lastVolumeTime[channel] == 0) {
 
+        // Draw small bar at the top of current bar
+        tft.fillRect(xOffset, yOffset, 2, vbarHeight, TFT_WHITE);
+
+        // Update storage
+        lastVolumePeak[channel] = xOffset;
+        lastVolumeTime[channel] = millis();
+
+    } else {
+
+        // Draw old saved peak
+        tft.fillRect(lastVolumePeak[channel], yOffset, 2, vbarHeight, TFT_WHITE);
+
+    }
 
 }
