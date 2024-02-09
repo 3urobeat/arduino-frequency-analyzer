@@ -1,17 +1,17 @@
 /*
  * File: readoutScreen.cpp
  * Project: arduino-frequency-analyzer
- * Created Date: 19.09.2022 14:53:19
+ * Created Date: 2022-09-19 14:53:19
  * Author: 3urobeat
- * 
- * Last Modified: 22.09.2022 15:10:02
+ *
+ * Last Modified: 2024-02-09 22:06:43
  * Modified By: 3urobeat
- * 
- * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
- * 
+ *
+ * Copyright (c) 2022 - 2024 3urobeat <https://github.com/3urobeat>
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>. 
+ * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
 
@@ -22,7 +22,7 @@
  * Prints units, dividers, labels, etc. to setup readout screen
  */
 void setupReadoutScreen() {
-    
+
     /* ------ Show project name as title in the top left ------ */
     tft.setCursor(5, 15);
     tft.setFreeFont(FMBO9);
@@ -58,7 +58,7 @@ void setupReadoutScreen() {
     const char freqs[15][4] = {" 25", " 40", " 63", "100", "157", "250", "400", "630", " 1k", "1k6", "2k5", " 4k", "6k3", "10k", "16k"};
 
     for (int i = 0; i <= 14; i++) {
-        
+
         // Because of limited space, we need to print at alternating height
         if (i % 2 == 0) {
             tft.drawFastVLine(cursorPosX + 11, 156, 12, TFT_LIGHTGREY); // Draw (long) line pointing label to corresponding bar. Move to the label middle, start at y = 156 and draw down 12 pixels
@@ -80,7 +80,7 @@ void setupReadoutScreen() {
     tft.print("L");
     tft.setCursor(10, 225);
     tft.print("R");
-    
+
 
     /* ------ Show left/right channel volume dummy readout ------ */
     tft.drawString(" 00.0", 291, 198);
