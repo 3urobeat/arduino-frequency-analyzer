@@ -30,7 +30,7 @@ unsigned long lastSpectrumTime[30] = {};
 void drawSpectrumSnowPeak(int num, int xOffset, int yOffset) {
 
     // Draw new peak if higher (which is < since we draw from top to bottom), if last change is more than 2 sec ago or if no peak has been drawn before
-    if (yOffset < lastSpectrumPeak[num] || millis() - lastSpectrumTime[num] > 2000 || lastSpectrumTime[num] == 0) {
+    if (yOffset <= lastSpectrumPeak[num] || millis() - lastSpectrumTime[num] > 2000 || lastSpectrumTime[num] == 0) {
 
         // Draw small bar at the top of current bar
         tft.fillRect(xOffset, yOffset, barWidth, 2, TFT_WHITE);
@@ -61,7 +61,7 @@ unsigned long lastVolumeTime[2] = {};
 void drawVolumeSnowPeak(int channel, int xOffset, int yOffset) {
 
     // Draw new peak if higher, if last change is more than 2 sec ago or if no peak has been drawn before
-    if (xOffset > lastVolumePeak[channel] || millis() - lastVolumeTime[channel] > 2000 || lastVolumeTime[channel] == 0) {
+    if (xOffset >= lastVolumePeak[channel] || millis() - lastVolumeTime[channel] > 2000 || lastVolumeTime[channel] == 0) {
 
         // Draw small bar at the top of current bar
         tft.fillRect(xOffset, yOffset, 2, vbarHeight, TFT_WHITE);

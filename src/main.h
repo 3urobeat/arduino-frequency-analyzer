@@ -19,7 +19,15 @@
 #include <TFT_eSPI.h>
 #include "../lib/TFT_eSPI/examples/320 x 240/Free_Font_Demo/Free_Fonts.h" // excuse me for this stupid import but please let me use the free fonts definitions fellow compiler, thank you.
 
-extern const char *version;
+
+// Configuration variables
+#define displayRotation 3 // Choose either 1 or 3, depending on in which orientation your display is. 0 & 2 are vertical and therefore useless for this project
+
+
+// Do not modify
+#define version "v0.1.0"
+
+
 extern TFT_eSPI tft;
 
 void showWelcomeScreen(unsigned int clearDelay);

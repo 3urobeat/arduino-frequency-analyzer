@@ -20,8 +20,6 @@
 #include "helpers/helpers.h"
 
 
-const char *version = "v0.1.0";
-
 // Call display lib constructor
 TFT_eSPI tft = TFT_eSPI();
 
@@ -31,7 +29,7 @@ void setup() {
 
     // Init display and show welcome screen
     tft.init();
-    tft.setRotation(1);
+    tft.setRotation(displayRotation);
     tft.fillScreen(TFT_BLACK);
     tft.setCursor(0, 0);
     tft.setFreeFont(FMB9);
@@ -45,5 +43,9 @@ void setup() {
 
 
 void loop() {
-    
 
+    testRandomReadouts();
+
+    delay(100);
+
+}
